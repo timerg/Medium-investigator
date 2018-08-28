@@ -36,45 +36,44 @@ class FrontRemover extends stream.Transform {
   }
 }
 
-function getJSON (userName, callback) {
+exports.getUserObj = function (userName, callback) {
   var options = {
     host: 'medium.com',
-    path: '/@' + userName + '?format=json',
+    path: '/@' + userName + '/latest',
     method: 'GET',
     port: 443,
     headers: {
-        'Content-Type': 'application/json'
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
     }
   }
-  console.log("rest::getJSON");
   var port = https
-  var req = port.request(options, function(res)
-  {
+  var req = port.request(options, function(res) {
       var output = '';
-      console.log(options.host + ':' + res.statusCode);
       res.setEncoding('utf8');
-      let remover = new FrontRemover()
+      
+			let remover = new FrontRemover()
       res.pipe(remover)
       remover.on('data', function (chunk) {
           output += chunk
       });
-
+			
+			res.on('error', function(err) {
+				console.log(res.statusCode, ": ", err)
+				callback(null, null, err)
+			})
+			
       res.on('end', function() {
           var obj = JSON.parse(output);
-          onResult(res.statusCode, obj);
+          callback(obj);
       });
   });
-
-  req.on('error', function(err) {
-      console.log(err)
-      //res.send('error: ' + err.message);
-  });
+	
+	req.on('error', (e) => {
+		console.error(`problem with request: ${e.message}`);
+	});
 
   req.end();
-};
-
-var options = {
-
 };
 
 
@@ -86,5 +85,3 @@ var options = {
 
 // payload -> userNavItemList -> Post -> "f3ba31a23ade"(PostId) -> virtuals -> totalClapCount
 //                                                              -> title
-
-export default getJSON

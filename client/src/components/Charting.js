@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Redirect, Switch } from 'react-router'
 import { NavLink as Nav } from 'react-router-dom'
 import styled from 'styled-components'
-import { Color, DescriptBar, Icons } from 'components/Styled'
+import { Color, Icons } from 'components/Styled'
 
 import IvgClapsPost from 'charts/IvgClapsPost'
 import IvgReadmin from 'charts/IvgReadmin'
@@ -25,12 +25,7 @@ const PlotContainer = styled.div`
 	margin-bottom: 20px;
 `
 
-const DescriptContainer = styled.div`
-	width: 300px;
-	flex: 1 0 auto;
-	display: flex;
-	flex-flow: row wrap;
-`
+
 
 const UserProfile = styled.div`
 	flex: 1 0 100%;
@@ -120,7 +115,6 @@ const NavLiNone = styled(Nav)`
 class Charts extends React.Component {
 	render() {
 		let u = this.props.userObj.payload.user
-		let m = this.props.userObj.payload.userMeta
 		const userInfo = {
 			name: u.name,
 			twitterName: u.twitterScreenName,

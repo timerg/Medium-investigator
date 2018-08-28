@@ -13,9 +13,9 @@ function getUser(access) {
 	return makePOST('/GET/user', access)
 }
 
-function getPublication(idAndToken) {
-	return makePOST('/GET/publications', idAndToken)
-}
+// function getPublication(idAndToken) {
+// 	return makePOST('/GET/publications', idAndToken)
+// }
 
 function getTargetUser(username) {
 	return makePOST('/v1/user_object', username.trim())
