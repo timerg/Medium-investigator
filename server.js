@@ -4,7 +4,7 @@ var api = require('./server-api')
 var getUserObj = require('./subject-parser').getUserObj
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.SPORT || 8000;
 
 var jsonParser = bodyParser.json();
 

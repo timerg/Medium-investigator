@@ -13,6 +13,7 @@ import RouteToAuth from 'components/Auth';
 import { fetchAuthURL, isTokenExpired } from 'api/api'
 var RouteWithToken = require('api/routeWidget').RouteWithToken;
 
+const PORT = process.env.PORT || 3000
 
 const Container = styled.div`
 	display: flex;
@@ -94,7 +95,7 @@ class App extends React.Component {
 	handleLogout() {
 		localStorage.setItem('MediumAccessToken', '')
 		localStorage.setItem('MediumAccessTokenExpireTime', '')
-		window.location="http://banacorn.com:3000"
+		window.location=`https://banacorn.com:${PORT}`
 	}
 
 	handleUserInfo(userInfo) {
@@ -116,7 +117,7 @@ class App extends React.Component {
 								return null
 							}} />
 							<RouteWithToken
-								path='/GouGouHome:3000'
+								path={`/GouGouHome:${PORT}`}
 								token={this.state.token}
 								authURL={this.state.authURL}
 								component={GouGouHome}
@@ -149,5 +150,3 @@ export default App;
 // lightskyblue, aliceblue, moccasin, saddlebrown
 
 //https://tylermcginnis.com/react-router-nested-routes/
-
-// http://127.0.0.1:3000/Authorization?state=%2FGouGouHome%3A3000&code=e03f66ce5fb0

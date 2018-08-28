@@ -47,7 +47,7 @@ function getPubInfo(obj) {
 			return 0
 		}
 	})
-	
+
 	return dataObj
 }
 
@@ -138,7 +138,7 @@ class IvgReadminPost extends React.Component {
 	handlePointClick(event) {
 		let chartElement = this.chart.getElementAtEvent(event)[0]
 		if(chartElement) {
-			window.open("https://medium.com/p/" + this.dataObj.pid[chartElement._index])
+			window.open("https://medium.com/p/" + this.dataObj.data[chartElement._index].pid)
 		}
 	}
 

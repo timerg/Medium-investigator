@@ -139,7 +139,7 @@ class IvgClapsPost extends React.Component {
 	handlePointClick(event) {
 		let chartElement = this.chart.getElementAtEvent(event)[0]
 		if(chartElement) {
-			window.open("https://medium.com/p/" + this.dataObj.pid[chartElement._index])
+			window.open("https://medium.com/p/" + this.dataObj.data[chartElement._index].pid)
 		}
 	}
 

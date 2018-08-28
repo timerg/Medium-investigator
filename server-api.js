@@ -1,5 +1,7 @@
 var medium = require('medium-sdk')
 
+const PORT = process.env.PORT || 3000
+const CONTYPE = process.env.PORT ? 'http' : 'https' 
 
 
 
@@ -11,7 +13,7 @@ var client = new medium.MediumClient({
 })
 
 
-var redirectURL = 'http://banacorn.com:3000/Authorization';
+var redirectURL = `${CONTYPE}://banacorn.com:${PORT}/Authorization`;
 
 var authURL = client.getAuthorizationUrl('secretState', redirectURL, [
   medium.Scope.BASIC_PROFILE, medium.Scope.LIST_PUBLICATIONS
