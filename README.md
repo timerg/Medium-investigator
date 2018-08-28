@@ -3,9 +3,9 @@
 A web app for visualizing the data of medium users.
 
 ## Getting Started 
-Link to the [app](https://banacorn.com/:3000)
+Link to the [app](http://banacorn.com)
 
-<img src="" width="800">
+![](https://github.com/timerg/Medium-investigator/blob/master/mi.gif)
 
 ## Notes
 The app is built with rca accompany with a stand alone express server.
