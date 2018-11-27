@@ -2,8 +2,8 @@
 
 A web app for visualizing the data of medium users.
 
-## Getting Started 
-Link to the [app](https://banacorn.com/:3000)
+## Getting Started
+Link to the [app](https://159.89.129.169:3000/)
 
 <img src="" width="800">
 
