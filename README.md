@@ -5,7 +5,7 @@ A web app for visualizing the data of medium users.
 ## Getting Started
 Link to the [app](https://159.89.129.169:3000/)
 
-<img src="" width="800">
+![](https://github.com/timerg/Medium-investigator/blob/master/mi.gif)
 
 ## Notes
 The app is built with rca accompany with a stand alone express server.
