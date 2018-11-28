@@ -137,7 +137,7 @@ class Charts extends React.Component {
 					<NavLi path={`${this.props.match.url}/claps`}> {<Icons.claps/>} </NavLi>
 					<NavLi path={`${this.props.match.url}/read-time`}> {<Icons.time />} </NavLi>
 					<NavLi path={`${this.props.match.url}/response`}> </NavLi>
-					<NavLi path='/GouGouHome:3000'>  {<Icons.return />} </NavLi>
+					<NavLi path='/GouGouHome'>  {<Icons.return />} </NavLi>
 				</ChartNav>
 				<PlotContainer>
 					<Switch>

@@ -36,10 +36,11 @@ const StartButton = styled(Link)`
 
 class Start extends React.Component {
 	render() {
+		const url = 'GouGouHome'
 		return (
 			<StartContainer>
 				<DescriptBar> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed ac dolor sit amet purus malesuada congue. Etiam quis quam. Mauris metus. Duis sapien nunc, commodo et, interdum suscipit, sollicitudin et, dolor. Nunc auctor. Maecenas ipsum velit, consectetuer eu lobortis ut, dictum at dui. </DescriptBar>
-				<StartBox><StartButton to='/GouGouHome:3000'>Start</StartButton></StartBox>
+				<StartBox><StartButton to={url}>Start</StartButton></StartBox>
 			</StartContainer>
 		)
 	}

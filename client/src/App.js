@@ -13,25 +13,28 @@ import RouteToAuth from 'components/Auth';
 import { fetchAuthURL, isTokenExpired } from 'api/api'
 var RouteWithToken = require('api/routeWidget').RouteWithToken;
 
-const PORT = process.env.PORT || 3000
+
+
+// the process.env.PORT is mysteriously undefined
+const port = process.env.NODE_ENV === 'development' ? 9090 : 3000
 
 const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin: 0 auto;
-	height: 100%;
-	align-items: center;
+display: flex;
+flex-direction: column;
+margin: 0 auto;
+height: 100%;
+align-items: center;
 `
 
 const PageContainer = styled.div`
-	flex: 1 0 auto;
-	display: flex;
-	flex-direction: column;
-	padding-left: 24px;
-	padding-right: 24px;
-	padding-top: 50px;
-	max-width: 1000px;
-	margin: 0 auto;
+flex: 1 0 auto;
+display: flex;
+flex-direction: column;
+padding-left: 24px;
+padding-right: 24px;
+padding-top: 50px;
+max-width: 1000px;
+margin: 0 auto;
 `
 
 
@@ -69,9 +72,12 @@ class App extends React.Component {
 		// asynchronous method. doesn't want it trigger re-render
 		fetchAuthURL().then(authURL => this.setState({
 			authURL: authURL
-		})).catch(e => this.setState({
-			authURL: ''
-		}))
+		})).catch(e => {
+			console.error(e)
+			this.setState({
+				authURL: ''
+			})
+		})
 	}
 
 
@@ -95,7 +101,7 @@ class App extends React.Component {
 	handleLogout() {
 		localStorage.setItem('MediumAccessToken', '')
 		localStorage.setItem('MediumAccessTokenExpireTime', '')
-		window.location=`https://banacorn.com:${PORT}`
+		window.location = 'http://' + window.location.host
 	}
 
 	handleUserInfo(userInfo) {
@@ -105,35 +111,35 @@ class App extends React.Component {
 	render() {
 		return(
 			<Router>
-				<Container>
-					<Navigation logged={this.state.logged} access={this.state.token.access} onUserInfo={this.handleUserInfo}/>
-					<PageContainer>
-						<Switch>
-							<Route exact path='/' component={Start} />
-							<Route exact path='/Info' component={Info} />
-							<Route exact path='/Server-not-response' component={NoResponse} />
-							<Route exact path='/logout' render={() =>{
-								this.handleLogout()
-								return null
-							}} />
-							<RouteWithToken
-								path={`/GouGouHome:${PORT}`}
-								token={this.state.token}
-								authURL={this.state.authURL}
-								component={GouGouHome}
-								comProps={{
-									token: this.state.token,
-									userInfo: this.state.userInfo,
-									callback: this.handleLogout,
-								}}
-								/>}
-							/>
-							<Route path='/Authorization' render={() =>
-								<RouteToAuth onAuth={this.handleAuth} authURL={this.state.authURL} />
-								} />
-						</Switch>
-					</PageContainer>
-				</Container>
+			<Container>
+			<Navigation logged={this.state.logged} access={this.state.token.access} onUserInfo={this.handleUserInfo}/>
+			<PageContainer>
+			<Switch>
+			<Route exact path='/' component={Start} />
+			<Route exact path='/Info' component={Info} />
+			<Route exact path='/Server-not-response' component={NoResponse} />
+			<Route exact path='/logout' render={() =>{
+				this.handleLogout()
+				return null
+			}} />
+			<RouteWithToken
+			path={`/GouGouHome`}
+			token={this.state.token}
+			authURL={this.state.authURL}
+			component={GouGouHome}
+			comProps={{
+				token: this.state.token,
+				userInfo: this.state.userInfo,
+				callback: this.handleLogout,
+			}}
+			/>}
+			/>
+			<Route path='/Authorization' render={() =>
+				<RouteToAuth onAuth={this.handleAuth} authURL={this.state.authURL} />
+			} />
+			</Switch>
+			</PageContainer>
+			</Container>
 			</Router>
 		)
 	}

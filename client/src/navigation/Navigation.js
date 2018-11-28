@@ -104,7 +104,7 @@ const Navigate = ({ logged, access, onUserInfo }) => {
 
 function HomeBotton({ logged }) {
 	if(logged) {
-		return <Nav exact to='/GouGouHome:3000'  > Home </Nav>
+		return <Nav exact to='/GouGouHome'  > Home </Nav>
 	} else {
 		return <Nav exact to='/'  > Home </Nav>
 	}

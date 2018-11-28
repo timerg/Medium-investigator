@@ -1,4 +1,15 @@
 
+function fetchWithTimeout(path, optionObj, time=6000) {
+	let timeoutPromise = new Promise((resolve, reject) => {
+		setTimeout(() => {
+			reject(new Error('Request Timeout'))
+		}, time)
+	})
+
+	return Promise.race([timeoutPromise, fetch(path, optionObj)])
+}
+
+
 function fetchAuthURL(nextPath) {
 	return makePOST('/GET/authurl', nextPath)
 }
@@ -23,23 +34,23 @@ function getTargetUser(username) {
 
 function makePOST(path, data) {
 	return new Promise ((resolve, reject) => {
-		fetch(path, {
-    	method: "POST",
-    	mode: "same-origin",
-    	cache: "no-cache",
-    	headers: {
-    		'content-type': "application/json"
-    	},
-      body: JSON.stringify({reqData: data}),
-    }).then((response) => {
+		fetchWithTimeout(path, {
+	    	method: "POST",
+	    	mode: "same-origin",
+	    	cache: "no-cache",
+				credentials: 'include',
+	    	headers: {
+	    		'content-type': "application/json"
+	    	},
+	      	body: JSON.stringify({reqData: data}),
+    	}).then((response) => {
 			if(!response.ok){
 				reject(response)
 			} else {
 				return response.json()
 			}
 		}).then((resJSON) => resolve(resJSON.resData)
-		).catch((e) => reject(e)
-		)
+		).catch((e) => reject(e))
 	})
 }
 
